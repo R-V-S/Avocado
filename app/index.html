@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="blocChat">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Avocado: A Chat App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <nav id="main">
+    <section id="UserCtrl" ng-controller="UserCtrl as userCtrl">
+      <div id="user-display">
+        <div id="avatar">
+          <img ng-src="{{ userCtrl.user.photoURL || 'assets/images/default-user-image.png' }}">
+        </div>
+        <div id="user-display-name">{{ userCtrl.user.displayName.split(' ')[0] || 'Anonymous Avocado' }}</div>
+        <button class="sign-in-out" id="sign-in" ng-click="userCtrl.auth.$signInWithPopup('google')" ng-if="!userCtrl.user">
+          <i class="material-icons">power_settings_new</i>
+          <span>Sign in</span>
+        </button>
+        <button class="sign-in-out" id="sign-out" ng-click="userCtrl.auth.$signOut()" ng-if="userCtrl.user">
+          <i class="material-icons">power_settings_new</i>
+          <span>Sign out</span>
+        </button>
+      </div>
+    </section>
+  </nav>
+  
+  <aside id="sidebar">
+    <div id="logo"></div>
+    <h1 id="wordmark">Avocado</h1>
+    <section id="RoomCtrl" ng-controller="RoomCtrl as roomCtrl">
+      <ul id="room-list">
+        <li 
+          ng-repeat="room in roomCtrl.rooms" 
+          ng-class="{active: room === roomCtrl.activeRoom }">
+            <button ng-click="roomCtrl.setRoom(room)" class="room-name">{{ room.name }}</button>
+            <button ng-click="roomCtrl.removeRoom(room)" class="remove remove-room-button" ng-if="roomCtrl.session.user && room.creator.email == roomCtrl.session.user.email">&times;</button>
+        </li>
+      </ul>
+      
+      <form id="create-room" ng-submit="roomCtrl.createRoom(roomCtrl.newRoomName)" ng-if="roomCtrl.session.user">
+        <input type="text" ng-model="roomCtrl.newRoomName" placeholder="Create a new room">
+        <input type="submit" value="+">
+      </form>
+    </section>
+  </aside>
+  
+  <main id="MessageCtrl" ng-controller="MessageCtrl as messageCtrl">
+    <h2>{{ messageCtrl.session.activeRoom.name }}</h2>
+    <ul id="message-list" ng-show="messageCtrl.scrollToBottom()">
+      <li ng-repeat="message in messageCtrl.messages | filter:messageCtrl.session.activeRoom.$id">
+        <div class="photo-url">
+          <img ng-src="{{ message.creator.photoURL || 'assets/images/default-user-image.png' }}">
+        </div>
+        <div class="info">
+          <div class="display-name">{{ message.creator.displayName }}</div>
+          <div class="sent-at">{{ message.sentAt | timeago }}</div>
+        </div>
+        <div class="content">
+          {{ message.content }} 
+          <button ng-click="messageCtrl.removeMessage(message)" class="remove remove-message-button" ng-if="messageCtrl.session.user && message.creator.email == messageCtrl.session.user.email">&times;</button>
+        </div>
+      </li>
+    </ul>
+    <form ng-submit="messageCtrl.createMessage(messageCtrl.newMessage)">
+      <input type="text" ng-model="messageCtrl.newMessage" placeholder="Say something">
+      <input type="submit">
+    </form>
+  </main>
+      
+  <!--  Scripts -->
+  
+  <!--  Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "REPLACE WITH YOUR APP'S CONFIG",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: ""
+  };
+  firebase.initializeApp(config);
+  </script>
+  <!--  AngularJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+  <!--  Angularfire -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.min.js"></script>
+  
+  <!--  Internal scripts should go after external dependencies -->
+  
+  <script src="/scripts/app.js"></script>
+  <script src="/scripts/controllers/RoomCtrl.js"></script>
+  <script src="/scripts/controllers/MessageCtrl.js"></script>
+  <script src="/scripts/controllers/UserCtrl.js"></script>
+  <script src="/scripts/services/DatabaseService.js"></script>
+  <script src="/scripts/services/SessionService.js"></script>
+  <script src="/scripts/filters/TimeagoFilter.js"></script>
+</body>
+</html>

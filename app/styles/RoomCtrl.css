@@ -1,0 +1,98 @@
+#RoomCtrl {
+  padding: 0.5rem;
+}
+#RoomCtrl ul {
+  padding: 0;
+}
+#RoomCtrl li {
+  list-style-type: none;
+  background: hsl(69, 63%, 37%);
+  margin-bottom: 0.33rem;
+  color: white;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  padding: 0.15rem;
+}
+#RoomCtrl li:hover {
+  background: hsl(63, 57%, 50%);
+  cursor: pointer;
+}
+#RoomCtrl li:hover .room-name {
+  color: white;
+}
+#RoomCtrl li.active .room-name {
+  font-weight: bold;
+  color: white;
+}
+#RoomCtrl li i {
+  font-size: 1rem;
+  transform: translateY(0.25rem);
+  color: #666;
+}
+#RoomCtrl .room-name {
+  color: hsl(53, 71%, 85%);
+  font-size: 0.9rem;
+  display: inline-block;
+  width: 90%;
+  text-align: left;
+}
+#RoomCtrl .remove {
+  float: right;
+  font-size: 0.9rem;
+  color: hsl(63, 57%, 50%);
+}
+#RoomCtrl li:hover .remove {
+  color: hsl(63, 57%, 80%);
+}
+#RoomCtrl li .remove:hover {
+  color: white;
+}
+
+
+form#create-room {
+  background: hsl(69, 63%, 37%);
+  bottom: 0;
+  margin: 0;
+  left: 0;
+  padding: 1rem;
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  border-top: 2px solid hsl(69, 63%, 37%);
+}
+#create-room label {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+#create-room input[type="text"] {
+  width: 87%;
+  background: hsl(69, 75%, 75%);
+  padding: 0.3rem 0.66rem;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 3px;
+  height: 2.2rem;
+  float: left;
+}
+#create-room input[type="text"]:focus {
+  background: hsl(69, 90%, 90%);
+  outline: none;
+  color: hsl(69, 63%, 20%);
+}
+#create-room input[type="submit"] {
+  border: none;
+  background: hsl(69, 69%, 68%);
+  color: hsl(69, 63%, 37%);
+  padding: 0.3rem;
+  width: 10%;
+  float: left;
+  font-size: 1.5rem;
+  line-height: 0.7rem;
+  height: 2.2rem;
+  margin-left: 3%;
+  border-radius: 3px;
+}
+#create-room input[type="submit"]:hover {
+  cursor: pointer;
+  background: hsl(69, 75%, 75%);
+}

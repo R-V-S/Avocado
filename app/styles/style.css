@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Nunito|Pacifico');
+@import 'MessageCtrl.css';
+@import 'RoomCtrl.css';
+@import 'UserCtrl.css';
+
+body, * {
+  font-family: "Nunito", sans-serif;
+}
+
+button {
+  border: none;
+  background: none;
+}
+button:hover {
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+
+#sidebar {
+  background: #9AAF23;
+  border-right: 1px solid hsla(69, 63%, 37%, 0.7);
+  box-shadow: 1px 0px 5px rgba(0,0,0,0.3);
+  color: white;
+  height: calc(100vh - 46px);
+  overflow: scroll;
+  position: fixed;
+  width: 25%;
+  z-index: 2;
+}
+#sidebar button {
+  color: #ccc;
+}
+#sidebar button:hover {
+  color: #fff;
+}
+#logo {
+  background: url('../assets/images/avocados.png') no-repeat;
+  background-size: contain;
+  background-position: 50%;
+  height: 140px;
+  width: 100%;
+  margin: 1rem 0;
+}
+h1#wordmark {
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  color: hsla(69, 69%, 68%, 1);
+}
+
+#sidebar button:hover span {
+  color: #ccc;
+}
+
+
+
+
+
+
+

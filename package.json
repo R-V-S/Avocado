@@ -1,0 +1,18 @@
+{
+  "name": "bloc-avocado",
+  "version": "0.0.1",
+  "description": "Avocado: A Chat App",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bloc/avocado"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Bloc Inc",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
